@@ -122,9 +122,13 @@ nav a:hover {
   display: block;
 }
 
+/* 푸터 */
 footer {
+  background-color: #1f3c88;
+  color: white;
   text-align: center;
-  background-color: #eee;
-  padding: 15px 0;
-  margin-top: 40px;
+  padding: 25px 10px;
+  font-size: 0.95rem;
+  margin-top: 80px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
