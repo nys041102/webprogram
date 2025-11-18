@@ -1,0 +1,247 @@
+/* Pretendard 웹폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+/* ============================
+   기본 변수 (색상 통일)
+   ============================ */
+:root {
+  --main-color: #6b67e7;
+  --pink-bg: #edb6c2;        /* SM 뉴스 같은 핑크 */
+  --text-dark: #111;
+  --text-normal: #444;
+}
+
+/* ############################
+   전체 기본 스타일
+############################### */
+body {
+  font-family: 'Pretendard', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+  color: var(--text-dark);
+  letter-spacing: 0.3px;
+}
+
+.inner {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* ############################
+   헤더 스타일
+############################### */
+.header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #ddd;
+}
+
+.header .inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--main-color);
+  letter-spacing: 1px;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 3px;
+  transition: .3s;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover {
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
+
+/* ############################
+   섹션 공통 스타일 (SM NEWS 스타일)
+############################### */
+.section {
+  background: var(--pink-bg);
+  padding: 110px 0;
+  margin: 0;
+}
+
+.section .inner {
+  background: transparent;
+  padding: 0;
+}
+
+/* 공통 제목 스타일 */
+.sec-title {
+  font-size: 60px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.sec-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  width: 100%;
+  height: 2px;
+  background: var(--text-dark);
+}
+
+/* 공통 텍스트 */
+.desc {
+  font-size: 21px;
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  max-width: 900px;
+}
+
+strong {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* ############################
+   내 소개 섹션
+############################### */
+.about .desc {
+  margin-bottom: 20px;
+}
+
+/* ############################
+   포트폴리오 링크
+############################### */
+.portfolio-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 14px 26px;
+  background: var(--main-color);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.portfolio-link:hover {
+  background: #6b67e7;
+}
+
+/* ############################
+   댓글 폼 & 리스트
+############################### */
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 30px;
+  max-width: 700px;
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #bbb;
+  font-size: 17px;
+  border-radius: 10px;
+  resize: none;
+  transition: .3s;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+  border-color: var(--main-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 106, 255, 0.15);
+}
+
+button {
+  width: fit-content;
+  background: var(--main-color);
+  color: #fff;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: #6b67e7;
+}
+
+/* 댓글 박스 */
+.comment-list {
+  margin-top: 40px;
+  max-width: 900px;
+}
+
+.comment-box {
+  background: #fdf3ff;
+  border-left: 4px solid var(--main-color);
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  animation: fadeIn .4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ############################
+   반응형
+############################### */
+@media (max-width: 900px) {
+  .sec-title {
+    font-size: 46px;
+  }
+  .desc {
+    font-size: 18px;
+  }
+}
+
+
+footer {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+  padding: 25px 0;
+  margin-top: 120px;
+  text-align: center;
+
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+}

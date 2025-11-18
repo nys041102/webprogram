@@ -1,3 +1,6 @@
+/* =============================
+   기본 초기화 + 폰트
+============================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,86 +9,137 @@
 }
 
 body {
-  background-color: #f7f9fc;
-  color: #004ea3;
-  line-height: 1.6;
+  background-color: #edb6c2; /* 전체 통일된 핑크 배경 */
+  color: #111;
+  line-height: 1.7;
+  padding-bottom: 60px;
 }
 
-/* 헤더 스타일 */
+/* =============================
+   헤더 (my.html 스타일 동일)
+============================= */
 header {
-  background: linear-gradient(90deg, #1f3c88, #2f56c0);
-  color: white;
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.6); /* 반투명 유리 느낌 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 25px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header h1 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111;
 }
 
 nav ul {
   display: flex;
-  justify-content: center;
   list-style: none;
-  gap: 30px;
-  flex-wrap: wrap;
+  gap: 25px;
 }
 
 nav a {
-  color: #ffffffcc;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1.05rem;
-  transition: 0.3s;
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: 0.25s;
 }
 
 nav a:hover {
-  color: #ffea5c;
+  color: #d46aff;
+  border-bottom: 2px solid #d46aff;
 }
 
-/* 전공 교과목 개설표 제목 스타일 */
+/* 반응형 */
+@media (max-width: 900px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* =============================
+   페이지 타이틀
+============================= */
 .page-title {
   text-align: center;
-  font-size: 2rem;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  color: #1f3c88;
+  font-size: 2.7rem;
+  font-weight: 900;
+  margin: 60px 0 40px;
+  color: #111;
 }
 
+/* =============================
+   메인 콘텐츠 컨테이너
+============================= */
 .curriculum-container {
-  max-width: 1000px;
-  margin: 0 auto 50px;
+  max-width: 1200px;
+  margin: auto;
   padding: 20px;
-  background: white;
-  border-radius: 12px;
 }
 
 .curriculum-container h2 {
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 2rem;
+  margin: 40px 0 20px;
+  color: #111;
+  font-weight: 800;
+  position: relative;
 }
 
+/* 제목 밑줄 */
+.curriculum-container h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #111;
+  margin-top: 10px;
+}
+
+/* =============================
+   이미지 박스
+============================= */
 .image-container {
-  overflow-x: auto;
+  margin: 20px 0 60px;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: center;
 }
 
 .image-container img {
   width: 100%;
-  max-width: 960px;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  margin-bottom: 40px;
+  max-width: 1000px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+/* =============================
+   푸터
+============================= */
 footer {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+  padding: 20px;
   text-align: center;
-  background-color: #eee;
-  padding: 15px 0;
-  margin-top: 40px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: 80px;
+  font-size: 0.95rem;
+  color: #111;
 }
