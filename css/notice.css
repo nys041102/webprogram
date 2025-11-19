@@ -1,4 +1,6 @@
-/* 기본 */
+/* =============================
+    기본 초기화 + 폰트
+============================= */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 * {
@@ -9,21 +11,19 @@
 }
 
 body {
-  background: #e0b3be;
+  background: #edb6c2;
   color: #111;
+  line-height: 1.7;
 }
 
-/* ------------------------------
-   🔥 공통 헤더 (다른 페이지와 동일)
------------------------------- */
+/* =============================
+    공통 헤더 (원래 오른쪽 정렬 복구)
+============================= */
 header {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
   padding: 25px 40px;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -31,7 +31,7 @@ header {
 
 .header-inner {
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,6 +42,7 @@ header h1 {
   font-weight: 800;
 }
 
+/* 메뉴 */
 nav ul {
   list-style: none;
   display: flex;
@@ -50,11 +51,11 @@ nav ul {
 
 nav a {
   text-decoration: none;
-  color: #333;
   font-weight: 600;
+  color: #333;
   padding-bottom: 3px;
   border-bottom: 2px solid transparent;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 nav a:hover,
@@ -63,125 +64,120 @@ nav a.active {
   border-bottom: 2px solid #d46aff;
 }
 
-/* ------------------------------
-    공지 제목 + 버튼
------------------------------- */
+/* =============================
+    페이지 제목 (가운데 정렬 + 밑줄)
+============================= */
 .notice-top {
   max-width: 1400px;
-  margin: 60px auto 30px;
-  padding: 0 20px;
-
+  margin: 50px auto 30px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .notice-top h2 {
-  font-size: 2.7rem;
+  font-size: 3rem;
   font-weight: 900;
-  margin: 0;
   text-align: center;
+  position: relative;
 }
 
-/* 작성 버튼 */
+/* 제목 아래 밑줄 */
+.notice-top h2::after {
+  content: "";
+  width: 200px;
+  height: 4px;
+  background: #111;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* 공지 작성 버튼 - 오른쪽 */
 .write-btn {
+  position: absolute;
+  right: 0;
+  top: 12px;
   background: #6c63ff;
-  color: #fff;
+  color: white;
   padding: 14px 28px;
   border-radius: 10px;
-  font-weight: 600;
   text-decoration: none;
-  transition: .2s;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
 .write-btn:hover {
   background: #574dff;
 }
 
-/* ------------------------------
-    캐러셀 구조
------------------------------- */
+/* =============================
+    캐러셀
+============================= */
+
 .carousel-container {
-  position: relative;
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto 80px;
+  position: relative;
   overflow: hidden;
+  padding: 0 40px;
 }
 
 .carousel-track {
   display: flex;
   gap: 40px;
-  transition: transform .4s ease;
+  transition: transform 0.4s ease;
 }
 
-/* 카드 */
 .notice-card {
-  min-width: 420px;
-  background: rgba(255,255,255,0.6);
+  min-width: 400px;
+  background: rgba(255, 255, 255, 0.6);
   padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .thumb {
   width: 100%;
-  height: 180px;
+  height: 220px;
   background: #d4b2ba;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-.title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.desc {
-  height: 50px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.date {
-  display: block;
-  margin-top: 20px;
-  font-weight: 700;
-}
-
-/* 캐러셀 좌우 버튼 */
+/* 화살표 버튼 */
 .carousel-btn {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
-
+  background: white;
   width: 60px;
   height: 60px;
   border-radius: 50%;
   border: none;
-
-  background: rgba(255,255,255,0.7);
-  font-size: 35px;
+  font-size: 30px;
   cursor: pointer;
-  transition: .3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.carousel-btn.left {
+  left: 0;
+}
+
+.carousel-btn.right {
+  right: 0;
 }
 
 .carousel-btn:hover {
-  background: rgba(255,255,255,1);
+  background: #ffe6f1;
 }
 
-.carousel-btn.left { left: -20px; }
-.carousel-btn.right { right: -20px; }
-
-/* ------------------------------
-    Footer
------------------------------- */
+/* =============================
+    푸터
+============================= */
 footer {
+  text-align: center;
+  padding: 20px;
   margin-top: 80px;
   background: rgba(255,255,255,0.5);
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid rgba(0,0,0,0.1);
 }
