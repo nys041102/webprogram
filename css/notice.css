@@ -1,21 +1,31 @@
-/* 기본 */
-body {
+/* =============================
+   기본 초기화 + 폰트
+============================= */
+* {
   margin: 0;
-  background: #e0b3be;
+  padding: 0;
+  box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
-  color: #111;
 }
 
-/* 헤더 유지 */
-/* 공통 헤더 (다른 페이지와 완전히 동일) */
+body {
+  background-color: #edb6c2; /* 다른 페이지랑 통일된 핑크 배경 */
+  color: #111;
+  line-height: 1.7;
+  padding-bottom: 60px;
+}
+
+/* =============================
+   헤더 (다른 페이지와 완전 동일)
+============================= */
 header {
   background: rgba(255, 255, 255, 0.6); 
-  backdrop-filter: blur(12px);  
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  padding: 30px 20px;  /* ★ 다른 페이지와 동일하게 통일 */
-  text-align: center; /* ★ 동일 */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* ★ 동일 */
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
   position: sticky;
   top: 0;
@@ -24,7 +34,7 @@ header {
 
 .header-inner {
   max-width: 1400px;
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -40,12 +50,12 @@ header h1 {
 nav ul {
   display: flex;
   list-style: none;
-  gap: 28px; /* 다른 페이지랑 동일 */
+  gap: 28px;
 }
 
 nav a {
   text-decoration: none;
-  font-size: 1.05rem; /* 동일 */
+  font-size: 1.05rem;
   font-weight: 600;
   color: #333;
   padding-bottom: 4px;
@@ -60,16 +70,20 @@ nav a:hover {
 
 /* 반응형 */
 @media (max-width: 900px) {
-  header {
+  .header-inner {
     flex-direction: column;
     gap: 10px;
   }
+
   nav ul {
     flex-wrap: wrap;
     justify-content: center;
   }
 }
-/* 상단 제목 + 버튼 */
+
+/* =============================
+   상단 제목 + 버튼 영역
+============================= */
 .notice-top {
   max-width: 1400px;
   margin: 40px auto;
@@ -99,16 +113,18 @@ nav a:hover {
   background: #574dff;
 }
 
-/* 카드 리스트 */
+/* =============================
+   공지 카드 리스트
+============================= */
 .notice-list {
   max-width: 1400px;
-  margin: 40px auto;
+  margin: 40px auto 80px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
 }
 
-/* 카드 */
+/* 개별 카드 */
 .notice-card {
   background: rgba(255,255,255,0.6);
   padding: 20px;
@@ -121,21 +137,21 @@ nav a:hover {
   transform: translateY(-5px);
 }
 
-/* 이미지 영역 */
+/* 이미지 영역 (사진 없어도 예쁘게) */
 .thumb {
   width: 100%;
   height: 180px;
-  background: #d4b2ba;
+  background: #d4b2ba;      /* 단색 블록 */
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-/* ‘NO IMAGE’ 글씨 제거 */
+/* NO IMAGE 텍스트 아예 제거 */
 .thumb.no-image::before {
   content: "";
 }
 
-/* 텍스트 */
+/* 카드 텍스트 */
 .title {
   font-size: 1.6rem;
   font-weight: 800;
@@ -165,7 +181,7 @@ nav a:hover {
   font-weight: 700;
 }
 
-/* SM 스타일 화살표 버튼 */
+/* SM 느낌 화살표 버튼 */
 .arrow-btn {
   width: 48px;
   height: 48px;
@@ -187,4 +203,16 @@ nav a:hover {
 .arrow-btn i {
   font-size: 18px;
   font-weight: 700;
+}
+
+
+footer {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: 80px;
+  font-size: 0.95rem;
+  color: #111;
 }
