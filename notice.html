@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>학과 공지 게시판 - 군산대학교 컴퓨터정보공학과</title>
+
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="css/notice.css" />
+</head>
+
+<body>
+
+  <!-- 🔵 공통 헤더 -->
+  <header>
+    <div class="header-inner">
+      <h1>군산대학교 컴퓨터정보공학과</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">홈</a></li>
+          <li><a href="notice.html" class="active">학과 공지</a></li>
+          <li><a href="professors.html">교수진</a></li>
+          <li><a href="curriculum.html">교과과정</a></li>
+          <li><a href="lab.html">연구실</a></li>
+          <li><a href="graduation.html">졸업요건</a></li>
+          <li><a href="careers.html">졸업 후 진로</a></li>
+          <li><a href="contact.html">오시는 길</a></li>
+          <li><a href="inquiry.html">문의</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 🌸 공지 페이지 타이틀 -->
+  <section class="notice-title">
+    <h2>학과 공지 게시판</h2>
+    <p>학과 관련 중요한 공지사항을 확인하세요.</p>
+  </section>
+
+  <!-- 📝 공지 등록 + 리스트 영역 -->
+  <section class="notice-container inner">
+
+    <!-- 공지 작성 폼 -->
+    <div class="notice-form">
+      <input type="text" id="noticeTitle" placeholder="공지 제목을 입력하세요" />
+      <textarea id="noticeContent" rows="4" placeholder="공지 내용을 입력하세요"></textarea>
+      <button id="addNoticeBtn">공지 등록</button>
+    </div>
+
+    <!-- 공지 리스트 -->
+    <div id="noticeList" class="notice-list"></div>
+  </section>
+
+  <!-- 공통 푸터 -->
+  <footer>
+    <p>&copy; 2025 군산대학교 컴퓨터정보공학과</p>
+  </footer>
+
+  <!-- JS 파일 -->
+  <script src="js/notice.js"></script>
+
+</body>
+</html>
