@@ -11,23 +11,23 @@
 }
 
 body {
-    background-color: #edb6c2; /* 다른 페이지랑 통일된 핑크 배경 */
+    background-color: #edb6c2; 
     color: #111;
     line-height: 1.7;
-    /* --- 복원된 부분: padding-bottom을 원래 값인 60px로 설정 --- */
-    padding-bottom: 60px; 
+    padding-bottom: 60px;
 }
 
 /* =============================
-    헤더 (교수진 페이지와 동일한 스타일로 통일)
+    헤더 (다른 모든 페이지와 100% 동일)
 ============================= */
 header {
     background: rgba(255, 255, 255, 0.6); 
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    padding: 25px 40px; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 30px 20px; 
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 
     position: sticky;
     top: 0;
@@ -35,7 +35,8 @@ header {
 }
 
 .header-inner {
-    margin: 0; 
+    max-width: 1400px;
+    margin: 0 auto;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -43,7 +44,7 @@ header {
 }
 
 header h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #111;
 }
@@ -51,14 +52,15 @@ header h1 {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 25px;
+    gap: 28px;
 }
 
 nav a {
     text-decoration: none;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #333;
-    padding-bottom: 3px;
+    padding-bottom: 4px;
     border-bottom: 2px solid transparent;
     transition: 0.25s;
 }
@@ -82,7 +84,7 @@ nav a:hover {
 }
 
 /* =============================
-    상단 제목 + 버튼 영역
+    상단 제목 + 버튼
 ============================= */
 .notice-top {
     max-width: 1400px;
@@ -90,24 +92,24 @@ nav a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px; 
+    padding: 0 40px;
 }
 
 .notice-top h2 {
     font-size: 3rem;
     font-weight: 900;
-    margin: 0;
 }
 
+/* 작성 버튼 */
 .write-btn {
     background: #6c63ff;
-    color: white;
+    color: #fff;
     padding: 14px 28px;
-    font-size: 1rem;
     border-radius: 10px;
-    text-decoration: none;
+    font-size: 1rem;
     font-weight: 600;
-    transition: 0.2s;
+    text-decoration: none;
+    transition: .2s;
 }
 
 .write-btn:hover {
@@ -115,45 +117,45 @@ nav a:hover {
 }
 
 /* =============================
-    공지 카드 리스트
+    공지 리스트 (카드형)
 ============================= */
 .notice-list {
     max-width: 1400px;
-    margin: 40px auto 80px; 
+    margin: 40px auto 80px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
-    padding: 0 40px; 
+    padding: 0 40px;
 }
 
-/* 개별 카드 */
+/* 카드 */
 .notice-card {
     background: rgba(255,255,255,0.6);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .notice-card:hover {
     transform: translateY(-5px);
 }
 
-/* 이미지 영역 (사진 없어도 예쁘게) */
+/* 이미지 영역 */
 .thumb {
     width: 100%;
     height: 180px;
-    background: #d4b2ba;/* 단색 블록 */
+    background: #d4b2ba;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-/* NO IMAGE 텍스트 아예 제거 */
+/* NO IMAGE 글씨 제거 */
 .thumb.no-image::before {
     content: "";
 }
 
-/* 카드 텍스트 */
+/* 텍스트 */
 .title {
     font-size: 1.6rem;
     font-weight: 800;
@@ -183,7 +185,7 @@ nav a:hover {
     font-weight: 700;
 }
 
-/* SM 느낌 화살표 버튼 */
+/* SM 화살표 버튼 */
 .arrow-btn {
     width: 48px;
     height: 48px;
@@ -195,12 +197,12 @@ nav a:hover {
     align-items: center;
     cursor: pointer;
     transition: .3s;
-    color: #111; 
+    color: #111;
 }
 
 .arrow-btn:hover {
     background: #2c2424;
-    color: white;
+    color: #fff;
 }
 
 .arrow-btn i {
@@ -210,7 +212,7 @@ nav a:hover {
 }
 
 /* =============================
-    푸터 (본문 아래에 일반적인 배치로 복원)
+    푸터 (다른 페이지와 동일)
 ============================= */
 footer {
     background: rgba(255,255,255,0.5);
@@ -218,9 +220,7 @@ footer {
     padding: 20px;
     text-align: center;
     border-top: 1px solid rgba(0,0,0,0.1);
-    /* --- 복원된 부분: fixed 관련 속성 제거, margin-top 복원 --- */
-    margin-top: 80px; /* 본문과 푸터 사이 여백 */
-    /* position, bottom, left, width, z-index 모두 제거 */
+    margin-top: 80px;
     font-size: 0.95rem;
     color: #111;
 }
