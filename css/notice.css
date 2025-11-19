@@ -17,23 +17,22 @@ body {
 }
 
 /* =============================
-   공통 헤더 (header 자체가 flex)
+   공통 헤더
 ============================= */
 header {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-
   padding: 25px 40px;
   position: sticky;
   top: 0;
   z-index: 100;
 
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 header h1 {
@@ -42,7 +41,6 @@ header h1 {
   color: #111;
 }
 
-/* 메뉴 */
 nav ul {
   list-style: none;
   display: flex;
@@ -70,7 +68,7 @@ nav a.active {
     flex-direction: column;
     gap: 10px;
   }
-  
+
   nav ul {
     flex-wrap: wrap;
     justify-content: center;
@@ -78,7 +76,7 @@ nav a.active {
 }
 
 /* =============================
-   페이지 제목 (가운데 정렬 + 밑줄)
+   페이지 제목
 ============================= */
 .notice-top {
   max-width: 1400px;
@@ -128,7 +126,7 @@ nav a.active {
 .carousel-container {
   max-width: 1400px;
   margin: 0 auto 80px;
-  position: relative;
+  position: relative; /* 버튼 absolute 위치 기준 */
   overflow: hidden;
   padding: 0 40px;
 }
@@ -140,7 +138,7 @@ nav a.active {
 }
 
 .notice-card {
-  min-width: 400px;
+  min-width: 400px;               /* JS에서 offsetWidth로 읽음 */
   background: rgba(255, 255, 255, 0.6);
   padding: 20px;
   border-radius: 16px;
@@ -155,7 +153,9 @@ nav a.active {
   margin-bottom: 15px;
 }
 
-/* 화살표 버튼 */
+/* =============================
+   캐러셀 화살표 버튼
+============================= */
 .carousel-btn {
   position: absolute;
   top: 45%;
@@ -168,15 +168,11 @@ nav a.active {
   font-size: 30px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 999; /* ➜ 트랙 위로 끌어올림 (핵심 해결) */
 }
 
-.carousel-btn.left {
-  left: 0;
-}
-
-.carousel-btn.right {
-  right: 0;
-}
+.carousel-btn.left { left: 0; }
+.carousel-btn.right { right: 0; }
 
 .carousel-btn:hover {
   background: #ffe6f1;
