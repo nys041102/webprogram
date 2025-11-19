@@ -1,183 +1,199 @@
 /* =============================
-    기본 초기화 + 폰트
+    기본 초기화 + 폰트
 ============================= */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap'); /* 폰트 임포트 추가 */
 
 * {
-  margin: 0;
-  padding: 0;
+ margin: 0;
+ padding: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-  background: #edb6c2;
-  color: #111;
-  line-height: 1.7;
+ background: #edb6c2;
+ color: #111;
+ line-height: 1.7;
 }
 
 /* =============================
-    공통 헤더 (원래 오른쪽 정렬 복구)
+    공통 헤더 (첫 번째 코드와 스타일 및 반응형 통일)
 ============================= */
 header {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  padding: 25px 40px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+ background: rgba(255, 255, 255, 0.6);
+ backdrop-filter: blur(12px);
+ padding: 25px 40px;
+ border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+ position: sticky;
+ top: 0;
+ z-index: 100;
 }
 
 .header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ max-width: 1400px;
+ margin: 0 auto;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
 }
 
 header h1 {
-  font-size: 1.8rem;
-  font-weight: 800;
+ font-size: 1.8rem; /* 첫 번째 코드와 동일 */
+ font-weight: 800;
 }
 
 /* 메뉴 */
 nav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
+ list-style: none;
+ display: flex;
+ gap: 25px;
 }
 
 nav a {
-  text-decoration: none;
-  font-weight: 600;
-  color: #333;
-  padding-bottom: 3px;
-  border-bottom: 2px solid transparent;
-  transition: 0.25s;
+ text-decoration: none;
+ font-weight: 600;
+ color: #333;
+ padding-bottom: 3px;
+ border-bottom: 2px solid transparent;
+ transition: 0.25s;
 }
 
 nav a:hover,
 nav a.active {
-  color: #d46aff;
-  border-bottom: 2px solid #d46aff;
+ color: #d46aff;
+ border-bottom: 2px solid #d46aff;
 }
 
+/* 반응형 (첫 번째 코드의 flex-direction: column을 .header-inner에 적용) */
+@media (max-width: 900px) {
+    .header-inner {
+        flex-direction: column; /* 세로로 쌓이도록 수정 */
+        gap: 10px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 /* =============================
-    페이지 제목 (가운데 정렬 + 밑줄)
+    페이지 제목 (가운데 정렬 + 밑줄)
 ============================= */
 .notice-top {
-  max-width: 1400px;
-  margin: 50px auto 30px;
-  display: flex;
-  justify-content: center;
-  position: relative;
+ max-width: 1400px;
+ margin: 50px auto 30px;
+ display: flex;
+ justify-content: center;
+ position: relative;
 }
 
 .notice-top h2 {
-  font-size: 3rem;
-  font-weight: 900;
-  text-align: center;
-  position: relative;
+ font-size: 3rem;
+ font-weight: 900;
+ text-align: center;
+ position: relative;
 }
 
 /* 제목 아래 밑줄 */
 .notice-top h2::after {
-  content: "";
-  width: 200px;
-  height: 4px;
-  background: #111;
-  display: block;
-  margin: 10px auto 0;
-  border-radius: 2px;
+ content: "";
+ width: 200px;
+ height: 4px;
+ background: #111;
+ display: block;
+ margin: 10px auto 0;
+ border-radius: 2px;
 }
 
 /* 공지 작성 버튼 - 오른쪽 */
 .write-btn {
-  position: absolute;
-  right: 0;
-  top: 12px;
-  background: #6c63ff;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
+ position: absolute;
+ right: 0;
+ top: 12px;
+ background: #6c63ff;
+ color: white;
+ padding: 14px 28px;
+ border-radius: 10px;
+ text-decoration: none;
+ font-weight: 600;
+ transition: 0.2s;
 }
 
 .write-btn:hover {
-  background: #574dff;
+ background: #574dff;
 }
 
 /* =============================
-    캐러셀
+    캐러셀
 ============================= */
 
 .carousel-container {
-  max-width: 1400px;
-  margin: 0 auto 80px;
-  position: relative;
-  overflow: hidden;
-  padding: 0 40px;
+ max-width: 1400px;
+ margin: 0 auto 80px;
+ position: relative;
+ overflow: hidden;
+ padding: 0 40px;
 }
 
 .carousel-track {
-  display: flex;
-  gap: 40px;
-  transition: transform 0.4s ease;
+ display: flex;
+ gap: 40px;
+ transition: transform 0.4s ease;
 }
 
 .notice-card {
-  min-width: 400px;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+ min-width: 400px;
+ background: rgba(255, 255, 255, 0.6);
+ padding: 20px;
+ border-radius: 16px;
+ box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
 }
 
 .thumb {
-  width: 100%;
-  height: 220px;
-  background: #d4b2ba;
-  border-radius: 12px;
-  margin-bottom: 15px;
+ width: 100%;
+ height: 220px;
+ background: #d4b2ba;
+ border-radius: 12px;
+ margin-bottom: 15px;
 }
 
 /* 화살표 버튼 */
 .carousel-btn {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  background: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+ position: absolute;
+ top: 45%;
+ transform: translateY(-50%);
+ background: white;
+ width: 60px;
+ height: 60px;
+ border-radius: 50%;
+ border: none;
+ font-size: 30px;
+ cursor: pointer;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .carousel-btn.left {
-  left: 0;
+ left: 0;
 }
 
 .carousel-btn.right {
-  right: 0;
+ right: 0;
 }
 
 .carousel-btn:hover {
-  background: #ffe6f1;
+ background: #ffe6f1;
 }
 
 /* =============================
     푸터
 ============================= */
 footer {
-  text-align: center;
-  padding: 20px;
-  margin-top: 80px;
   background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: 80px;
+  font-size: 0.95rem;
+  color: #111;
 }
