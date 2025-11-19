@@ -25,7 +25,7 @@ class Carousel {
         this.rightBtn.addEventListener("click", () => this.moveRight());
         this.rightBtn.addEventListener("click", () => {
     console.log("오른쪽 버튼 클릭됨!!!");
-});S
+});
     }
 
     moveRight() {
@@ -72,4 +72,3 @@ class Carousel {
 document.addEventListener("DOMContentLoaded", () => {
     new Carousel(".carousel-track", ".carousel-btn.left", ".carousel-btn.right");
 });
-
