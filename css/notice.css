@@ -8,49 +8,38 @@ body {
 
 /* 헤더 유지 */
 header {
-  background: rgba(255, 255, 255, 0.6); /* 반투명 흰색 */
-  backdrop-filter: blur(12px);          /* 블러 효과 */
-  -webkit-backdrop-filter: blur(12px);  /* 사파리용 */
+  background: rgba(255, 255, 255, 0.6); /* 반투명 유리 느낌 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-
+  padding: 25px 40px;
   position: sticky;
   top: 0;
   z-index: 100;
-}
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 
-.header-inner {
-  max-width: 1400px;
-  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: #111;
 }
 
-nav {
-  margin-left: auto;   /* 오른쪽 정렬 */
-}
-
 nav ul {
-  list-style: none;
   display: flex;
-  gap: 28px;
+  list-style: none;
+  gap: 25px;
 }
 
 nav a {
   text-decoration: none;
-  font-size: 1.05rem;
   font-weight: 600;
   color: #333;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
   border-bottom: 2px solid transparent;
   transition: 0.25s;
 }
@@ -60,17 +49,15 @@ nav a:hover {
   border-bottom: 2px solid #d46aff;
 }
 
-/* 모바일 대응 */
+/* 반응형 */
 @media (max-width: 900px) {
-  .header-inner {
+  header {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
-
   nav ul {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 14px;
   }
 }
 
