@@ -1,0 +1,104 @@
+/* 기본 */
+body {
+  margin: 0;
+  background: #edb6c2;
+  font-family: 'Pretendard', sans-serif;
+  color: #111;
+}
+
+/* 헤더 */
+header {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  padding: 25px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+}
+
+nav a.active {
+  color: #6b67e7;
+  border-bottom: 2px solid #6b67e7;
+}
+
+/* 작성 박스 */
+.write-container {
+  max-width: 700px;
+  margin: 70px auto;
+  background: #ffffffaa;
+  backdrop-filter: blur(5px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.write-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+/* 입력 폼 */
+.write-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.write-form input,
+.write-form textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #bbb;
+  font-size: 17px;
+}
+
+/* 버튼 */
+button {
+  padding: 14px;
+  background: #6b67e7;
+  border: none;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+button:hover {
+  background: #5a56d4;
+}
+
+/* 푸터 */
+footer {
+  text-align: center;
+  padding: 25px 0;
+  margin-top: 60px;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(8px);
+}
