@@ -2,14 +2,11 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>학과 공지 게시판</title>
-  <link rel="stylesheet" href="css/notice.css">
+  <link rel="stylesheet" href="../css/notice.css">
 </head>
-
 <body>
 
-<!-- 🔹 공통 헤더 유지 -->
 <header>
   <div class="header-inner">
     <h1>군산대학교 컴퓨터정보공학과</h1>
@@ -30,85 +27,48 @@
 </header>
 
 
-<!-- 🔹 제목 + 작성 버튼 -->
+<!-- 상단 제목 + 작성 버튼 -->
 <section class="notice-top">
-  <h1>학과 공지 게시판</h1>
+  <h2>학과 공지 게시판</h2>
+
   <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </section>
 
 
-<!-- 🔹 공지 슬라이드 -->
-<section class="notice-section">
+<!-- 공지 리스트 (카드형 스타일) -->
+<section class="notice-list">
 
-  <button class="slide-btn prev">&#10094;</button>
-
-  <div class="slider" id="slider">
-
-    <!-- 카드 1 -->
-    <div class="card">
-      <div class="img-box empty">
-        <span>NO IMAGE</span>
-      </div>
-      <h3>첫 번째 공지 제목</h3>
-      <p>공지 내용이 여기에 표시됩니다. 내용이 길어도 2줄만 보이고 나머지는 ... 처리됩니다.</p>
-
-      <div class="card-bottom">
-        <span class="date">2025. 11. 19</span>
-        <button class="more-btn">→</button>
-      </div>
+  <div class="notice-card">
+    <div class="thumb no-image"></div>
+    <h3 class="title">첫 번째 공지 제목</h3>
+    <p class="desc">공지 내용이 여기에 표시됩니다. 두 줄까지만 표시 후 말줄임…</p>
+    <div class="info">
+      <span class="date">2025. 11. 19</span>
+      <button class="arrow-btn"><i>→</i></button>
     </div>
-
-    <!-- 카드 2 -->
-    <div class="card">
-      <div class="img-box empty">
-        <span>NO IMAGE</span>
-      </div>
-      <h3>두 번째 공지 제목</h3>
-      <p>여기는 두 번째 공지 내용입니다.</p>
-      <div class="card-bottom">
-        <span class="date">2025. 11. 19</span>
-        <button class="more-btn">→</button>
-      </div>
-    </div>
-
-    <!-- 카드 3 -->
-    <div class="card">
-      <div class="img-box empty">
-        <span>NO IMAGE</span>
-      </div>
-      <h3>세 번째 공지 제목</h3>
-      <p>세 번째 공지 내용이 표시됩니다.</p>
-      <div class="card-bottom">
-        <span class="date">2025. 11. 19</span>
-        <button class="more-btn">→</button>
-      </div>
-    </div>
-
   </div>
 
-  <button class="slide-btn next">&#10095;</button>
+  <div class="notice-card">
+    <div class="thumb no-image"></div>
+    <h3 class="title">두 번째 공지 제목</h3>
+    <p class="desc">여기는 두 번째 공지 내용입니다. 두 줄까지만 출력됩니다.</p>
+    <div class="info">
+      <span class="date">2025. 11. 19</span>
+      <button class="arrow-btn"><i>→</i></button>
+    </div>
+  </div>
+
+  <div class="notice-card">
+    <div class="thumb no-image"></div>
+    <h3 class="title">세 번째 공지 제목</h3>
+    <p class="desc">세 번째 공지 내용이 표시됩니다.</p>
+    <div class="info">
+      <span class="date">2025. 11. 19</span>
+      <button class="arrow-btn"><i>→</i></button>
+    </div>
+  </div>
 
 </section>
-
-
-<script>
-  const slider = document.getElementById("slider");
-  const next = document.querySelector(".next");
-  const prev = document.querySelector(".prev");
-
-  let index = 0;
-
-  next.addEventListener("click", () => {
-    index++;
-    slider.style.transform = `translateX(-${index * 420}px)`;
-  });
-
-  prev.addEventListener("click", () => {
-    if (index > 0) index--;
-    slider.style.transform = `translateX(-${index * 420}px)`;
-  });
-</script>
-
 
 </body>
 </html>
