@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>학과 공지 게시판</title>
+  <title>공지 작성</title>
   <link rel="stylesheet" href="css/notice.css" />
 </head>
 <body>
@@ -13,7 +13,6 @@
   <nav>
     <ul>
       <li><a href="index.html">홈</a></li>
-      <li><a href="notice.html" class="active">학과 공지</a></li>
       <li><a href="professors.html">교수진</a></li>
       <li><a href="curriculum.html">교과과정</a></li>
       <li><a href="lab.html">연구실</a></li>
@@ -25,28 +24,32 @@
   </nav>
 </header>
 
-<section class="notice-header">
-  <h2>학과 공지 게시판</h2>
-  <a href="notice_write.html" class="btn-write">공지 작성하기</a>
-</section>
+<section class="write-section">
+  <h2>공지 작성</h2>
 
-<section class="notice-list">
-  <div class="notice-item">
-    <h3>2025년 1학기 개강일 안내</h3>
-    <p class="date">2025-01-22</p>
-    <p class="preview">2025년 1학기 개강일은 3월 3일입니다.</p>
-  </div>
+  <form class="write-form" onsubmit="submitNotice(event)">
+    <input type="text" id="title" placeholder="공지 제목을 입력하세요" required />
+    <textarea id="content" placeholder="공지 내용을 입력하세요" required></textarea>
 
-  <div class="notice-item">
-    <h3>졸업작품 설명회 일정 안내</h3>
-    <p class="date">2025-01-10</p>
-    <p class="preview">졸업작품 OT가 2월 중 디지털정보관에서 진행됩니다.</p>
-  </div>
+    <div class="btn-area">
+      <button type="button" onclick="location.href='notice.html'" class="btn-cancel">뒤로가기</button>
+      <button type="submit" class="btn-submit">등록하기</button>
+    </div>
+  </form>
 </section>
 
 <footer>
   <p>© 2025 군산대학교 컴퓨터정보공학과</p>
 </footer>
+
+<script>
+function submitNotice(event) {
+  event.preventDefault();
+
+  alert("공지 등록이 완료되었습니다!");
+  location.href = "notice.html";
+}
+</script>
 
 </body>
 </html>
