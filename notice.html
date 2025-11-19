@@ -7,13 +7,13 @@
 </head>
 <body>
 
-  <!-- 헤더 (다른 페이지와 같은 구조: h1 + nav) -->
-  <header>
+<header>
+  <div class="header-inner">
     <h1>군산대학교 컴퓨터정보공학과</h1>
     <nav>
       <ul>
         <li><a href="index.html">홈</a></li>
-        <li><a href="notice.html" class="active">학과 공지</a></li>
+        <li><a class="active" href="notice.html">학과 공지</a></li>
         <li><a href="professors.html">교수진</a></li>
         <li><a href="curriculum.html">교과과정</a></li>
         <li><a href="lab.html">연구실</a></li>
@@ -23,78 +23,63 @@
         <li><a href="inquiry.html">문의</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- 상단 제목 + 작성 버튼 -->
-  <section class="notice-top">
-    <h2>학과 공지 게시판</h2>
-    <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
-  </section>
+<!-- 제목 + 작성버튼 -->
+<section class="notice-top">
+  <h2>학과 공지 게시판</h2>
+  <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
+</section>
 
-  <!-- 캐러셀 전체 박스 -->
-  <div class="carousel-container">
-    <!-- 왼쪽 슬라이드 버튼 -->
-    <button class="carousel-btn left" aria-label="이전 공지">
-      &#10094;
-    </button>
+<!-- 캐러셀 전체 박스 -->
+<div class="carousel-container">
 
-    <!-- 가운데 슬라이드 영역(가로 스크롤) -->
-    <div class="carousel-window">
-      <div class="carousel-track">
+  <button class="carousel-btn left">&#10094;</button>
 
-        <!-- 카드 1 -->
-        <div class="notice-card">
-          <div class="thumb no-image"></div>
-          <h3 class="title">첫 번째 공지 제목</h3>
-          <p class="desc">
-            첫 번째 공지 내용이 여기에 표시됩니다. 두 줄까지만 보여주고 뒤는 말줄임 처리됩니다.
-          </p>
-          <span class="date">2025. 11. 19</span>
-        </div>
+  <div class="carousel-track">
 
-        <!-- 카드 2 -->
-        <div class="notice-card">
-          <div class="thumb no-image"></div>
-          <h3 class="title">두 번째 공지 제목</h3>
-          <p class="desc">
-            두 번째 공지 내용입니다. 예시로 글을 조금 더 길게 써볼게요. 두 줄까지만 화면에 보여요.
-          </p>
-          <span class="date">2025. 11. 19</span>
-        </div>
-
-        <!-- 카드 3 -->
-        <div class="notice-card">
-          <div class="thumb no-image"></div>
-          <h3 class="title">세 번째 공지 제목</h3>
-          <p class="desc">
-            세 번째 공지 내용이 표시됩니다. 간단한 안내 문구 정도가 들어갑니다.
-          </p>
-          <span class="date">2025. 11. 19</span>
-        </div>
-
-        <!-- 카드 4 (예시로 하나 더) -->
-        <div class="notice-card">
-          <div class="thumb no-image"></div>
-          <h3 class="title">네 번째 공지 제목</h3>
-          <p class="desc">
-            네 번째 공지 내용입니다. 공지사항이 많아졌을 때 슬라이드로 옮겨가며 볼 수 있어요.
-          </p>
-          <span class="date">2025. 11. 20</span>
-        </div>
-
-      </div>
+    <!-- ★ 공지카드 1 -->
+    <div class="notice-card">
+      <div class="thumb no-image"></div>
+      <h3 class="title">첫 번째 공지 제목</h3>
+      <p class="desc">공지 내용입니다. 두 줄까지만 표시됩니다…</p>
+      <span class="date">2025. 11. 19</span>
     </div>
 
-    <!-- 오른쪽 슬라이드 버튼 -->
-    <button class="carousel-btn right" aria-label="다음 공지">
-      &#10095;
-    </button>
+    <!-- ★ 공지카드 2 -->
+    <div class="notice-card">
+      <div class="thumb no-image"></div>
+      <h3 class="title">두 번째 공지 제목</h3>
+      <p class="desc">두 번째 공지 내용입니다. 두 줄까지만 표시됩니다…</p>
+      <span class="date">2025. 11. 19</span>
+    </div>
+
+    <!-- ★ 공지카드 3 -->
+    <div class="notice-card">
+      <div class="thumb no-image"></div>
+      <h3 class="title">세 번째 공지 제목</h3>
+      <p class="desc">세 번째 공지 내용입니다.</p>
+      <span class="date">2025. 11. 19</span>
+    </div>
+
+    <!-- ★ 공지카드 4 -->
+    <div class="notice-card">
+      <div class="thumb no-image"></div>
+      <h3 class="title">네 번째 공지 제목</h3>
+      <p class="desc">네 번째 공지 내용입니다.</p>
+      <span class="date">2025. 11. 20</span>
+    </div>
+
   </div>
 
-  <footer>
-    <p>&copy; 2025 군산대학교 컴퓨터정보공학과</p>
-  </footer>
+  <button class="carousel-btn right">&#10095;</button>
+</div>
 
-  <script src="js/notice_slide.js"></script>
+<footer>
+  <p>&copy; 2025 군산대학교 컴퓨터정보공학과</p>
+</footer>
+
+<script src="js/notice_slide.js"></script>
 </body>
 </html>
