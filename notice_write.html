@@ -12,49 +12,58 @@
     <h1>군산대학교 컴퓨터정보공학과</h1>
     <nav>
       <ul>
+        <li><a href="index.html">홈</a></li>
         <li><a href="notice.html" class="active">학과 공지</a></li>
+        <li><a href="professors.html">교수진</a></li>
+        <li><a href="curriculum.html">교과과정</a></li>
+        <li><a href="lab.html">연구실</a></li>
+        <li><a href="graduation.html">졸업요건</a></li>
+        <li><a href="careers.html">졸업 후 진로</a></li>
+        <li><a href="contact.html">오시는 길</a></li>
+        <li><a href="inquiry.html">문의</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <section class="write-container">
-  <h2>공지 작성하기</h2>
+  <h2>📢 공지 작성하기</h2>
 
   <form id="writeForm" class="write-form">
-    <input type="text" id="title" placeholder="공지 제목을 입력하세요" required>
+    <label>공지 제목</label>
+    <input type="text" id="title" required>
 
-    <textarea id="content" rows="7" placeholder="공지 내용을 입력하세요" required></textarea>
+    <label>공지 내용</label>
+    <textarea id="content" rows="6" required></textarea>
 
     <button type="submit">공지 등록</button>
   </form>
-</section>
 
-<footer>
-  © 2025 군산대학교 컴퓨터정보공학과
-</footer>
+  <a href="notice.html" class="back-btn">← 공지 목록으로 돌아가기</a>
+</section>
 
 <script>
   const form = document.getElementById("writeForm");
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
     const title = document.getElementById("title").value.trim();
     const content = document.getElementById("content").value.trim();
 
-    const newNotice = {
+    if (!title || !content) return;
+
+    const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
+
+    saved.push({
       title,
       content,
-      date: new Date().toLocaleDateString()
-    };
+      date: new Date().toLocaleDateString("ko-KR")
+    });
 
-    const existing = JSON.parse(localStorage.getItem("noticeData") || "[]");
-    existing.push(newNotice);
-    localStorage.setItem("noticeData", JSON.stringify(existing));
+    localStorage.setItem("noticeData", JSON.stringify(saved));
 
-    alert("공지 등록 완료!");
-    location.href = "notice.html";
+    window.location.href = "notice.html"; // 저장 후 리스트 페이지로 이동
   });
 </script>
 

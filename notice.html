@@ -2,19 +2,18 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>학과 공지 게시판</title>
+  <title>학과 공지</title>
   <link rel="stylesheet" href="css/notice.css">
 </head>
 <body>
 
-<!-- 헤더 -->
 <header>
   <div class="header-inner">
     <h1>군산대학교 컴퓨터정보공학과</h1>
     <nav>
       <ul>
         <li><a href="index.html">홈</a></li>
-         <li><a href="notice.html" class="active">학과 공지</a></li>
+        <li><a href="notice.html" class="active">학과 공지</a></li>
         <li><a href="professors.html">교수진</a></li>
         <li><a href="curriculum.html">교과과정</a></li>
         <li><a href="lab.html">연구실</a></li>
@@ -22,42 +21,37 @@
         <li><a href="careers.html">졸업 후 진로</a></li>
         <li><a href="contact.html">오시는 길</a></li>
         <li><a href="inquiry.html">문의</a></li>
+        
       </ul>
     </nav>
   </div>
 </header>
 
-<!-- 공지 제목 + 작성 버튼 -->
-<section class="notice-header">
+<!-- 타이틀 + 공지 작성 버튼 -->
+<section class="notice-top">
   <h2>학과 공지 게시판</h2>
-  <a href="notice_write.html" class="write-btn">공지 작성하기</a>
+  <a href="notice_write.html" class="write-btn">+ 공지 작성하기</a>
 </section>
 
-<!-- 공지 카드 리스트 -->
-<section class="notice-list" id="noticeList">
-  <!-- JS가 카드 추가 -->
-</section>
-
-<footer>
-  © 2025 군산대학교 컴퓨터정보공학과
-</footer>
+<!-- 공지 목록 -->
+<section class="notice-list" id="noticeList"></section>
 
 <script>
-  // localStorage에서 공지 가져오기
-  const list = document.getElementById("noticeList");
+  const noticeList = document.getElementById("noticeList");
   const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
 
   function render() {
-    list.innerHTML = "";
+    noticeList.innerHTML = "";
+
     saved.forEach(item => {
       const card = document.createElement("div");
       card.className = "notice-card";
       card.innerHTML = `
         <h3>${item.title}</h3>
-        <p>${item.content}</p>
+        <p class="content">${item.content}</p>
         <span class="date">${item.date}</span>
       `;
-      list.prepend(card);
+      noticeList.prepend(card);
     });
   }
 
