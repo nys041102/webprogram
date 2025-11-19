@@ -2,18 +2,21 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>학과 공지</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>학과 공지 게시판</title>
   <link rel="stylesheet" href="css/notice.css">
 </head>
+
 <body>
 
+<!-- 🔹 공통 헤더 유지 -->
 <header>
   <div class="header-inner">
     <h1>군산대학교 컴퓨터정보공학과</h1>
     <nav>
       <ul>
         <li><a href="index.html">홈</a></li>
-         <li><a href="notice.html" class="active">학과 공지</a></li>
+        <li><a href="notice.html" class="active">학과 공지</a></li>
         <li><a href="professors.html">교수진</a></li>
         <li><a href="curriculum.html">교과과정</a></li>
         <li><a href="lab.html">연구실</a></li>
@@ -26,47 +29,86 @@
   </div>
 </header>
 
-<section class="notice-header">
-  <h2>학과 공지 게시판</h2>
+
+<!-- 🔹 제목 + 작성 버튼 -->
+<section class="notice-top">
+  <h1>학과 공지 게시판</h1>
   <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </section>
 
-<div class="slider-wrap">
-  <button class="arrow left">❮</button>
 
-  <div class="slider" id="slider"></div>
+<!-- 🔹 공지 슬라이드 -->
+<section class="notice-section">
 
-  <button class="arrow right">❯</button>
-</div>
+  <button class="slide-btn prev">&#10094;</button>
+
+  <div class="slider" id="slider">
+
+    <!-- 카드 1 -->
+    <div class="card">
+      <div class="img-box empty">
+        <span>NO IMAGE</span>
+      </div>
+      <h3>첫 번째 공지 제목</h3>
+      <p>공지 내용이 여기에 표시됩니다. 내용이 길어도 2줄만 보이고 나머지는 ... 처리됩니다.</p>
+
+      <div class="card-bottom">
+        <span class="date">2025. 11. 19</span>
+        <button class="more-btn">→</button>
+      </div>
+    </div>
+
+    <!-- 카드 2 -->
+    <div class="card">
+      <div class="img-box empty">
+        <span>NO IMAGE</span>
+      </div>
+      <h3>두 번째 공지 제목</h3>
+      <p>여기는 두 번째 공지 내용입니다.</p>
+      <div class="card-bottom">
+        <span class="date">2025. 11. 19</span>
+        <button class="more-btn">→</button>
+      </div>
+    </div>
+
+    <!-- 카드 3 -->
+    <div class="card">
+      <div class="img-box empty">
+        <span>NO IMAGE</span>
+      </div>
+      <h3>세 번째 공지 제목</h3>
+      <p>세 번째 공지 내용이 표시됩니다.</p>
+      <div class="card-bottom">
+        <span class="date">2025. 11. 19</span>
+        <button class="more-btn">→</button>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="slide-btn next">&#10095;</button>
+
+</section>
+
 
 <script>
-const slider = document.getElementById("slider");
-const data = JSON.parse(localStorage.getItem("noticeData") || "[]");
+  const slider = document.getElementById("slider");
+  const next = document.querySelector(".next");
+  const prev = document.querySelector(".prev");
 
-data.forEach(item => {
-  const box = document.createElement("div");
-  box.className = "card";
+  let index = 0;
 
-  box.innerHTML = `
-    <img src="${item.image || "https://via.placeholder.com/500x280?text=No+Image"}">
-    <h3>${item.title}</h3>
-    <p>${item.content.length > 70 ? item.content.slice(0,70)+"…" : item.content}</p>
-    <div class="bottom">
-      <span>${item.date}</span>
-      <button class="more">→</button>
-    </div>
-  `;
-  slider.appendChild(box);
-});
+  next.addEventListener("click", () => {
+    index++;
+    slider.style.transform = `translateX(-${index * 420}px)`;
+  });
 
-// 슬라이드 이동
-document.querySelector(".left").onclick = () =>
-  slider.scrollBy({ left: -500, behavior: "smooth" });
-
-document.querySelector(".right").onclick = () =>
-  slider.scrollBy({ left: 500, behavior: "smooth" });
-
+  prev.addEventListener("click", () => {
+    if (index > 0) index--;
+    slider.style.transform = `translateX(-${index * 420}px)`;
+  });
 </script>
+
 
 </body>
 </html>
