@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>학과 공지 게시판</title>
-  <link rel="stylesheet" href="css/notice.css">
+  <link rel="stylesheet" href="css/notice.css" />
 </head>
 <body>
 
@@ -26,51 +26,44 @@
   </div>
 </header>
 
-<!-- 상단 제목 + 작성 버튼 -->
 <section class="notice-top">
   <h2>학과 공지 게시판</h2>
   <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </section>
 
-<!-- 🔥 슬라이드 영역 컨테이너 -->
-<div class="slider-wrapper">
-  <button class="slide-btn left">〈</button>
+<!-- 캐러셀 Wrapper -->
+<div class="carousel-container">
 
-  <section class="notice-list">
+  <button class="carousel-btn left">&#10094;</button>
 
+  <div class="carousel-track">
+    <!-- 카드 1 -->
     <div class="notice-card">
       <div class="thumb no-image"></div>
       <h3 class="title">첫 번째 공지 제목</h3>
-      <p class="desc">공지 내용이 여기에 표시됩니다. 두 줄까지만 표시 후 말줄임…</p>
-      <div class="info">
-        <span class="date">2025. 11. 19</span>
-        <button class="arrow-btn"><i>→</i></button>
-      </div>
+      <p class="desc">공지 내용입니다. 두 줄까지만 표시됩니다…</p>
+      <span class="date">2025. 11. 19</span>
     </div>
 
+    <!-- 카드 2 -->
     <div class="notice-card">
       <div class="thumb no-image"></div>
       <h3 class="title">두 번째 공지 제목</h3>
-      <p class="desc">여기는 두 번째 공지 내용입니다. 두 줄까지만 출력됩니다.</p>
-      <div class="info">
-        <span class="date">2025. 11. 19</span>
-        <button class="arrow-btn"><i>→</i></button>
-      </div>
+      <p class="desc">두 번째 공지 내용입니다. 두 줄까지만 표시됩니다…</p>
+      <span class="date">2025. 11. 19</span>
     </div>
 
+    <!-- 카드 3 -->
     <div class="notice-card">
       <div class="thumb no-image"></div>
       <h3 class="title">세 번째 공지 제목</h3>
-      <p class="desc">세 번째 공지 내용이 표시됩니다.</p>
-      <div class="info">
-        <span class="date">2025. 11. 19</span>
-        <button class="arrow-btn"><i>→</i></button>
-      </div>
+      <p class="desc">세 번째 공지 내용입니다.</p>
+      <span class="date">2025. 11. 19</span>
     </div>
 
-  </section>
+  </div>
 
-  <button class="slide-btn right">〉</button>
+  <button class="carousel-btn right">&#10095;</button>
 </div>
 
 <footer>
