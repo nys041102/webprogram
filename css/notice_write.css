@@ -44,6 +44,30 @@ nav a {
   color: #6b67e7;
 }
 
+
+.write-header {
+  max-width: 1400px;
+  margin: 40px auto 20px;
+}
+
+.back-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #555;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #6c63ff;
+  color: white;
+}
+
+
 /* 작성 폼 전체 */
 .write-container {
   max-width: 700px;
