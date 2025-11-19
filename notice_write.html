@@ -2,69 +2,64 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>공지 작성하기</title>
+  <title>공지 작성</title>
   <link rel="stylesheet" href="css/notice_write.css">
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <h1>군산대학교 컴퓨터정보공학과</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">홈</a></li>
-        <li><a href="notice.html" class="active">학과 공지</a></li>
-        <li><a href="professors.html">교수진</a></li>
-        <li><a href="curriculum.html">교과과정</a></li>
-        <li><a href="lab.html">연구실</a></li>
-        <li><a href="graduation.html">졸업요건</a></li>
-        <li><a href="careers.html">졸업 후 진로</a></li>
-        <li><a href="contact.html">오시는 길</a></li>
-        <li><a href="inquiry.html">문의</a></li>
-      </ul>
-    </nav>
+    <h1>공지 작성</h1>
   </div>
 </header>
 
-<section class="write-container">
-  <h2>📢 공지 작성하기</h2>
+<div class="write-container">
 
-  <form id="writeForm" class="write-form">
-    <label>공지 제목</label>
-    <input type="text" id="title" required>
+  <label>공지 제목</label>
+  <input type="text" id="title">
 
-    <label>공지 내용</label>
-    <textarea id="content" rows="6" required></textarea>
+  <label>공지 내용</label>
+  <textarea id="content" rows="6"></textarea>
 
-    <button type="submit">공지 등록</button>
-  </form>
+  <label>이미지 업로드</label>
+  <input type="file" id="imageInput" accept="image/*">
 
-  <a href="notice.html" class="back-btn">← 공지 목록으로 돌아가기</a>
-</section>
+  <button id="saveBtn">저장하기</button>
+</div>
 
 <script>
-  const form = document.getElementById("writeForm");
+document.getElementById("saveBtn").onclick = () => {
+  const title = document.getElementById("title").value;
+  const content = document.getElementById("content").value;
+  const imageInput = document.getElementById("imageInput").files[0];
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  if (!title || !content) {
+    alert("제목과 내용을 입력하세요.");
+    return;
+  }
 
-    const title = document.getElementById("title").value.trim();
-    const content = document.getElementById("content").value.trim();
-
-    if (!title || !content) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const imgURL = imageInput ? e.target.result : null;
 
     const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
 
     saved.push({
       title,
       content,
-      date: new Date().toLocaleDateString("ko-KR")
+      image: imgURL,
+      date: new Date().toISOString().slice(0,10)
     });
 
     localStorage.setItem("noticeData", JSON.stringify(saved));
 
-    window.location.href = "notice.html"; // 저장 후 리스트 페이지로 이동
-  });
+    alert("저장되었습니다!");
+    location.href = "notice.html";
+  };
+
+  if (imageInput) reader.readAsDataURL(imageInput);
+  else reader.onload();
+};
 </script>
 
 </body>

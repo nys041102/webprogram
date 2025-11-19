@@ -13,7 +13,6 @@
     <nav>
       <ul>
         <li><a href="index.html">홈</a></li>
-        <li><a href="notice.html" class="active">학과 공지</a></li>
         <li><a href="professors.html">교수진</a></li>
         <li><a href="curriculum.html">교과과정</a></li>
         <li><a href="lab.html">연구실</a></li>
@@ -21,41 +20,60 @@
         <li><a href="careers.html">졸업 후 진로</a></li>
         <li><a href="contact.html">오시는 길</a></li>
         <li><a href="inquiry.html">문의</a></li>
-        
+        <li><a href="notice.html" class="active">학과 공지</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<!-- 타이틀 + 공지 작성 버튼 -->
 <section class="notice-top">
   <h2>학과 공지 게시판</h2>
-  <a href="notice_write.html" class="write-btn">+ 공지 작성하기</a>
+  <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </section>
 
-<!-- 공지 목록 -->
-<section class="notice-list" id="noticeList"></section>
+<!-- 🔥 슬라이더 전체 -->
+<div class="slider-container">
+  <button class="slide-btn left-btn">❮</button>
+
+  <div class="slider" id="slider"></div>
+
+  <button class="slide-btn right-btn">❯</button>
+</div>
 
 <script>
-  const noticeList = document.getElementById("noticeList");
+  const slider = document.getElementById("slider");
   const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
 
-  function render() {
-    noticeList.innerHTML = "";
+  saved.forEach(item => {
+    const preview = item.content.length > 90 ? item.content.slice(0,90)+"…" : item.content;
+    const img = item.image ? item.image : "https://via.placeholder.com/600x350?text=이미지";
 
-    saved.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "notice-card";
-      card.innerHTML = `
-        <h3>${item.title}</h3>
-        <p class="content">${item.content}</p>
-        <span class="date">${item.date}</span>
-      `;
-      noticeList.prepend(card);
-    });
-  }
+    const box = document.createElement("div");
+    box.className = "news-box";
 
-  render();
+    box.innerHTML = `
+      <img src="${img}" class="news-img">
+      <h3>${item.title}</h3>
+      <p class="desc">${preview}</p>
+      <div class="news-footer">
+        <button class="arrow-btn">→</button>
+        <span>${item.date}</span>
+      </div>
+    `;
+
+    slider.appendChild(box);
+  });
+
+  // 슬라이드 기능
+  let scrollAmount = 0;
+
+  document.querySelector(".left-btn").onclick = () => {
+    slider.scrollBy({ left: -500, behavior: "smooth" });
+  };
+
+  document.querySelector(".right-btn").onclick = () => {
+    slider.scrollBy({ left: 500, behavior: "smooth" });
+  };
 </script>
 
 </body>
