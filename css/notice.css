@@ -1,218 +1,229 @@
 /* =============================
-   기본 초기화 + 폰트
+    기본 초기화 + 폰트
 ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
-  background-color: #edb6c2; /* 다른 페이지랑 통일된 핑크 배경 */
-  color: #111;
-  line-height: 1.7;
-  padding-bottom: 60px;
+    background-color: #edb6c2; /* 다른 페이지랑 통일된 핑크 배경 */
+    color: #111;
+    line-height: 1.7;
+    padding-bottom: 60px;
 }
 
 /* =============================
-   헤더 (다른 페이지와 완전 동일)
+    헤더 (교수진 페이지와 동일한 스타일로 통일)
 ============================= */
 header {
-  background: rgba(255, 255, 255, 0.6); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    /* --- 수정된 부분: padding, box-shadow 제거, border-bottom 추가 --- */
+    padding: 25px 40px; 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    /* --- 수정된 부분: 최대 폭 제한 및 중앙 정렬 제거 (헤더 패딩을 따르도록) --- */
+    margin: 0; 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #111;
+    /* --- 수정된 부분: 글꼴 크기 2rem -> 1.8rem으로 변경 --- */
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111;
 }
 
 nav ul {
-  display: flex;
-  list-style: none;
-  gap: 28px;
+    display: flex;
+    list-style: none;
+    /* --- 수정된 부분: 간격 28px -> 25px로 변경 --- */
+    gap: 25px;
 }
 
 nav a {
-  text-decoration: none;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #333;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
-  transition: 0.25s;
+    text-decoration: none;
+    /* --- 수정된 부분: font-size 제거 (기본값 사용) --- */
+    font-weight: 600;
+    color: #333;
+    /* --- 수정된 부분: 패딩 4px -> 3px로 변경 --- */
+    padding-bottom: 3px;
+    border-bottom: 2px solid transparent;
+    transition: 0.25s;
 }
 
 nav a:hover {
-  color: #d46aff;
-  border-bottom: 2px solid #d46aff;
+    color: #d46aff;
+    border-bottom: 2px solid #d46aff;
 }
 
 /* 반응형 */
 @media (max-width: 900px) {
-  .header-inner {
-    flex-direction: column;
-    gap: 10px;
-  }
+    .header-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-  nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 /* =============================
-   상단 제목 + 버튼 영역
+    상단 제목 + 버튼 영역
 ============================= */
 .notice-top {
-  max-width: 1400px;
-  margin: 40px auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    max-width: 1400px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px; /* 헤더 좌우 패딩과 일치하도록 추가 */
 }
 
 .notice-top h2 {
-  font-size: 3rem;
-  font-weight: 900;
-  margin: 0;
+    font-size: 3rem;
+    font-weight: 900;
+    margin: 0;
 }
 
 .write-btn {
-  background: #6c63ff;
-  color: white;
-  padding: 14px 28px;
-  font-size: 1rem;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.2s;
+    background: #6c63ff;
+    color: white;
+    padding: 14px 28px;
+    font-size: 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .write-btn:hover {
-  background: #574dff;
+    background: #574dff;
 }
 
 /* =============================
-   공지 카드 리스트
+    공지 카드 리스트
 ============================= */
 .notice-list {
-  max-width: 1400px;
-  margin: 40px auto 80px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
+    max-width: 1400px;
+    margin: 40px auto 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+    padding: 0 40px; /* 헤더 좌우 패딩과 일치하도록 추가 */
 }
 
 /* 개별 카드 */
 .notice-card {
-  background: rgba(255,255,255,0.6);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  transition: 0.3s;
+    background: rgba(255,255,255,0.6);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
 .notice-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 /* 이미지 영역 (사진 없어도 예쁘게) */
 .thumb {
-  width: 100%;
-  height: 180px;
-  background: #d4b2ba;      /* 단색 블록 */
-  border-radius: 10px;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 180px;
+    background: #d4b2ba; /* 단색 블록 */
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 /* NO IMAGE 텍스트 아예 제거 */
 .thumb.no-image::before {
-  content: "";
+    content: "";
 }
 
 /* 카드 텍스트 */
 .title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: 10px;
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
 .desc {
-  font-size: 1rem;
-  color: #333;
-  height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+    font-size: 1rem;
+    color: #333;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* 날짜 + 화살표 */
 .info {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .date {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 /* SM 느낌 화살표 버튼 */
 .arrow-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid #2c2424;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: .3s;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #2c2424;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+    color: #111; /* 텍스트 색상 추가 */
 }
 
 .arrow-btn:hover {
-  background: #2c2424;
-  color: white;
+    background: #2c2424;
+    color: white;
 }
 
 .arrow-btn i {
-  font-size: 18px;
-  font-weight: 700;
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal; /* 화살표 텍스트 스타일 제거 */
 }
 
-
+/* =============================
+    푸터
+============================= */
 footer {
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(8px);
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin-top: 80px;
-  font-size: 0.95rem;
-  color: #111;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    margin-top: 80px;
+    font-size: 0.95rem;
+    color: #111;
 }
