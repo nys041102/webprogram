@@ -1,3 +1,5 @@
+console.log("JS 연결 완료!");
+
 class Carousel {
     constructor(trackSelector, leftBtnSelector, rightBtnSelector, gap = 40) {
         this.track = document.querySelector(trackSelector);
@@ -21,7 +23,9 @@ class Carousel {
 
     addEvents() {
         this.rightBtn.addEventListener("click", () => this.moveRight());
-        this.leftBtn.addEventListener("click", () => this.moveLeft());
+        this.rightBtn.addEventListener("click", () => {
+    console.log("오른쪽 버튼 클릭됨!!!");
+});
     }
 
     moveRight() {
