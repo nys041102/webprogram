@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<!-- 헤더 (다른 페이지와 동일) -->
 <header>
   <div class="header-inner">
     <h1>군산대학교 컴퓨터정보공학과</h1>
@@ -26,17 +27,19 @@
   </div>
 </header>
 
-<section class="notice-top">
+<!-- 제목 + 밑줄 -->
+<section class="notice-title">
   <h2>학과 공지 게시판</h2>
-  <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
+  <div class="underline"></div>
 </section>
 
-<!-- 캐러셀 Wrapper -->
+<!-- 캐러셀 전체 -->
 <div class="carousel-container">
 
   <button class="carousel-btn left">&#10094;</button>
 
   <div class="carousel-track">
+
     <!-- 카드 1 -->
     <div class="notice-card">
       <div class="thumb no-image"></div>
@@ -64,6 +67,12 @@
   </div>
 
   <button class="carousel-btn right">&#10095;</button>
+
+</div>
+
+<!-- 오른쪽 작성하기 버튼 -->
+<div class="write-btn-container">
+  <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </div>
 
 <footer>
