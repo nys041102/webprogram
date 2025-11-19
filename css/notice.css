@@ -1,0 +1,196 @@
+/* ======================================
+   기본 설정 + 폰트
+====================================== */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', sans-serif;
+}
+
+body {
+  background: #edb6c2;  /* 사이트 전체 핑크 톤 통일 */
+  color: #111;
+  line-height: 1.7;
+}
+
+.inner {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ======================================
+   헤더 (공통 스타일)
+====================================== */
+header {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: .3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #d46aff;
+  border-bottom: 2px solid #d46aff;
+}
+
+/* ======================================
+   공지 페이지 제목
+====================================== */
+.notice-title {
+  text-align: center;
+  padding: 90px 20px 40px;
+}
+
+.notice-title h2 {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.notice-title p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* ======================================
+   공지 작성 폼
+====================================== */
+.notice-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  max-width: 700px;
+}
+
+.notice-form input,
+.notice-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #bbb;
+  font-size: 16px;
+}
+
+.notice-form textarea {
+  resize: none;
+}
+
+.notice-form input:focus,
+.notice-form textarea:focus {
+  border-color: #6b67e7;
+  box-shadow: 0 0 0 3px rgba(212, 106, 255, 0.15);
+  outline: none;
+}
+
+.notice-form button {
+  width: fit-content;
+  padding: 12px 20px;
+  background: #6b67e7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.notice-form button:hover {
+  background: #544ee0;
+}
+
+/* ======================================
+   공지 리스트
+====================================== */
+.notice-list {
+  margin-top: 40px;
+  max-width: 900px;
+}
+
+.notice-item {
+  background: #fdf3ff;
+  border-left: 5px solid #6b67e7;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.notice-item-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.notice-item-content {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.notice-item-date {
+  font-size: 14px;
+  color: #555;
+}
+
+.delete-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background: #ff6b81;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #e65971;
+}
+
+/* ======================================
+   푸터
+====================================== */
+footer {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: center;
+  margin-top: 90px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
