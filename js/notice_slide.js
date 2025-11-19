@@ -22,11 +22,19 @@ class Carousel {
     }
 
     addEvents() {
-        this.rightBtn.addEventListener("click", () => this.moveRight());
-        this.rightBtn.addEventListener("click", () => {
-    console.log("오른쪽 버튼 클릭됨!!!");
-});
-    }
+    // 오른쪽 버튼
+    this.rightBtn.addEventListener("click", () => {
+        console.log("오른쪽 버튼 클릭됨!!!");
+        this.moveRight();
+    });
+
+    // 왼쪽 버튼
+    this.leftBtn.addEventListener("click", () => {
+        console.log("왼쪽 버튼 클릭됨!!!");
+        this.moveLeft();
+    });
+}
+
 
     moveRight() {
         if (this.index < this.cards.length - 1) {
