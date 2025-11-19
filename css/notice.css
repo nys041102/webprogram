@@ -7,29 +7,32 @@ body {
 }
 
 /* 헤더 유지 */
+/* 공통 헤더 (다른 페이지와 완전히 동일) */
 header {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.6); 
+  backdrop-filter: blur(12px);  
   -webkit-backdrop-filter: blur(12px);
 
-  padding: 25px 40px;
+  padding: 30px 20px;  /* ★ 다른 페이지와 동일하게 통일 */
+  text-align: center; /* ★ 동일 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* ★ 동일 */
+
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .header-inner {
   max-width: 1400px;
   margin: auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-
 header h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #111;
 }
@@ -37,14 +40,15 @@ header h1 {
 nav ul {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 28px; /* 다른 페이지랑 동일 */
 }
 
 nav a {
   text-decoration: none;
+  font-size: 1.05rem; /* 동일 */
   font-weight: 600;
   color: #333;
-  padding-bottom: 3px;
+  padding-bottom: 4px;
   border-bottom: 2px solid transparent;
   transition: 0.25s;
 }
