@@ -1,52 +1,68 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>학과 공지 게시판</title>
-  <link rel="stylesheet" href="css/notice.css" />
+  <link rel="stylesheet" href="css/notice.css">
 </head>
 <body>
 
+<!-- 헤더 -->
 <header>
-  <h1>군산대학교 컴퓨터정보공학과</h1>
-  <nav>
-    <ul>
-      <li><a href="index.html">홈</a></li>
-      <li><a href="notice.html" class="active">학과 공지</a></li>
-      <li><a href="professors.html">교수진</a></li>
-      <li><a href="curriculum.html">교과과정</a></li>
-      <li><a href="lab.html">연구실</a></li>
-      <li><a href="graduation.html">졸업요건</a></li>
-      <li><a href="careers.html">졸업 후 진로</a></li>
-      <li><a href="contact.html">오시는 길</a></li>
-      <li><a href="inquiry.html">문의</a></li>
-    </ul>
-  </nav>
+  <div class="header-inner">
+    <h1>군산대학교 컴퓨터정보공학과</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">홈</a></li>
+         <li><a href="notice.html" class="active">학과 공지</a></li>
+        <li><a href="professors.html">교수진</a></li>
+        <li><a href="curriculum.html">교과과정</a></li>
+        <li><a href="lab.html">연구실</a></li>
+        <li><a href="graduation.html">졸업요건</a></li>
+        <li><a href="careers.html">졸업 후 진로</a></li>
+        <li><a href="contact.html">오시는 길</a></li>
+        <li><a href="inquiry.html">문의</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
+<!-- 공지 제목 + 작성 버튼 -->
 <section class="notice-header">
   <h2>학과 공지 게시판</h2>
-  <a href="notice_write.html" class="btn-write">공지 작성하기</a>
+  <a href="notice_write.html" class="write-btn">공지 작성하기</a>
 </section>
 
-<section class="notice-list">
-  <div class="notice-item">
-    <h3>2025년 1학기 개강일 안내</h3>
-    <p class="date">2025-01-22</p>
-    <p class="preview">2025년 1학기 개강일은 3월 3일입니다.</p>
-  </div>
-
-  <div class="notice-item">
-    <h3>졸업작품 설명회 일정 안내</h3>
-    <p class="date">2025-01-10</p>
-    <p class="preview">졸업작품 OT가 2월 중 디지털정보관에서 진행됩니다.</p>
-  </div>
+<!-- 공지 카드 리스트 -->
+<section class="notice-list" id="noticeList">
+  <!-- JS가 카드 추가 -->
 </section>
 
 <footer>
-  <p>© 2025 군산대학교 컴퓨터정보공학과</p>
+  © 2025 군산대학교 컴퓨터정보공학과
 </footer>
+
+<script>
+  // localStorage에서 공지 가져오기
+  const list = document.getElementById("noticeList");
+  const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
+
+  function render() {
+    list.innerHTML = "";
+    saved.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "notice-card";
+      card.innerHTML = `
+        <h3>${item.title}</h3>
+        <p>${item.content}</p>
+        <span class="date">${item.date}</span>
+      `;
+      list.prepend(card);
+    });
+  }
+
+  render();
+</script>
 
 </body>
 </html>

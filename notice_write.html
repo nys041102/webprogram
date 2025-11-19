@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>공지 작성</title>
-  <link rel="stylesheet" href="css/notice.css" />
+  <meta charset="UTF-8">
+  <title>공지 작성하기</title>
+  <link rel="stylesheet" href="css/notice_write.css">
 </head>
 <body>
 
 <header>
-  <h1>군산대학교 컴퓨터정보공학과</h1>
-  <nav>
-    <ul>
-      <li><a href="index.html">홈</a></li>
-      <li><a href="professors.html">교수진</a></li>
-      <li><a href="curriculum.html">교과과정</a></li>
-      <li><a href="lab.html">연구실</a></li>
-      <li><a href="graduation.html">졸업요건</a></li>
-      <li><a href="careers.html">졸업 후 진로</a></li>
-      <li><a href="contact.html">오시는 길</a></li>
-      <li><a href="inquiry.html">문의</a></li>
-    </ul>
-  </nav>
+  <div class="header-inner">
+    <h1>군산대학교 컴퓨터정보공학과</h1>
+    <nav>
+      <ul>
+        <li><a href="notice.html" class="active">학과 공지</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<section class="write-section">
-  <h2>공지 작성</h2>
+<section class="write-container">
+  <h2>공지 작성하기</h2>
 
-  <form class="write-form" onsubmit="submitNotice(event)">
-    <input type="text" id="title" placeholder="공지 제목을 입력하세요" required />
-    <textarea id="content" placeholder="공지 내용을 입력하세요" required></textarea>
+  <form id="writeForm" class="write-form">
+    <input type="text" id="title" placeholder="공지 제목을 입력하세요" required>
 
-    <div class="btn-area">
-      <button type="button" onclick="location.href='notice.html'" class="btn-cancel">뒤로가기</button>
-      <button type="submit" class="btn-submit">등록하기</button>
-    </div>
+    <textarea id="content" rows="7" placeholder="공지 내용을 입력하세요" required></textarea>
+
+    <button type="submit">공지 등록</button>
   </form>
 </section>
 
 <footer>
-  <p>© 2025 군산대학교 컴퓨터정보공학과</p>
+  © 2025 군산대학교 컴퓨터정보공학과
 </footer>
 
 <script>
-function submitNotice(event) {
-  event.preventDefault();
+  const form = document.getElementById("writeForm");
 
-  alert("공지 등록이 완료되었습니다!");
-  location.href = "notice.html";
-}
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
+
+    const newNotice = {
+      title,
+      content,
+      date: new Date().toLocaleDateString()
+    };
+
+    const existing = JSON.parse(localStorage.getItem("noticeData") || "[]");
+    existing.push(newNotice);
+    localStorage.setItem("noticeData", JSON.stringify(existing));
+
+    alert("공지 등록 완료!");
+    location.href = "notice.html";
+  });
 </script>
 
 </body>
