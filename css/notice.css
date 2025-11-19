@@ -8,7 +8,7 @@ body {
 
 /* 헤더 유지 */
 header {
-  background: rgba(255, 255, 255, 0.6); /* 반투명 유리 느낌 */
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
@@ -16,7 +16,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   display: flex;
   justify-content: space-between;
@@ -60,7 +61,6 @@ nav a:hover {
     justify-content: center;
   }
 }
-
 /* 상단 제목 + 버튼 */
 .notice-top {
   max-width: 1400px;
