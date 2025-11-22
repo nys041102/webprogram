@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>공지 상세보기</title>
+  <link rel="stylesheet" href="../css/notice_detail.css">
+</head>
+<body>
+
+<header>
+  <h1>공지 상세보기</h1>
+</header>
+
+<div class="view-container">
+  <div class="notice-box">
+    <h2 id="title">로딩중...</h2>
+    <p id="date"></p>
+    <img id="image" style="display:none;" />
+    <div id="content" class="content"></div>
+
+    <button onclick="history.back()" class="back-btn">← 뒤로가기</button>
+  </div>
+</div>
+
+<script>
+// URL의 id 값을 가져오기
+const urlParams = new URLSearchParams(location.search);
+const id = urlParams.get("id");
+
+if (!id) {
+  document.querySelector(".view-container").innerHTML = "<p>잘못된 접근입니다.</p>";
+}
+
+// DB에서 공지 데이터 가져오기
+fetch(`http://localhost:3000/notice/${id}`)
+  .then(res => res.json())
+  .then(data => {
+    if (!data || data.error) {
+      document.querySelector(".view-container").innerHTML = "<p>공지 정보를 불러올 수 없습니다.</p>";
+      return;
+    }
+
+    document.getElementById("title").textContent = data.title;
+    document.getElementById("date").textContent = data.created_at.split("T")[0];
+    document.getElementById("content").textContent = data.content;
+
+    if (data.image_url) {
+      const img = document.getElementById("image");
+      img.src = data.image_url;
+      img.style.display = "block";
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>나의 포트폴리오</title>
-  <link rel="stylesheet" href="css/my.css">
+  <link rel="stylesheet" href="../css/my.css">
 </head>
 <body>
 
@@ -68,20 +68,54 @@
     const form = document.getElementById("commentForm");
     const commentList = document.getElementById("commentList");
 
+    // ⭐ 댓글 목록 불러오기
+    function loadComments() {
+      fetch("http://localhost:3000/comment")
+        .then(res => res.json())
+        .then(list => {
+          commentList.innerHTML = "";
+
+          list.forEach(item => {
+            commentList.innerHTML += `
+              <div class="comment-box">
+                <strong>${item.name}</strong>
+                <p>${item.message}</p>
+                <span class="time">${item.created_at.slice(0, 16)}</span>
+              </div>
+            `;
+          });
+        })
+        .catch(err => console.error("댓글 불러오기 오류:", err));
+    }
+
+    // ⭐ 댓글 저장
     form.addEventListener("submit", function(event) {
       event.preventDefault();
       
       const name = document.getElementById("username").value;
-      const comment = document.getElementById("comment").value;
+      const message = document.getElementById("comment").value;
 
-      const commentBox = document.createElement("div");
-      commentBox.className = "comment-box";
-      commentBox.innerHTML = `<strong>${name}</strong><p>${comment}</p>`;
-      
-      commentList.prepend(commentBox);
-
-      form.reset();
+      fetch("http://localhost:3000/comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, message })
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          loadComments();  // 저장 후 자동 새로고침
+          form.reset();
+        } else {
+          alert("댓글 저장 실패: " + result.error);
+        }
+      })
+      .catch(err => console.error("댓글 저장 오류:", err));
     });
+
+    // 페이지 열리면 자동으로 댓글 목록 불러오기
+    loadComments();
   </script>
 
 </body>

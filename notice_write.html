@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>공지 작성</title>
-  <link rel="stylesheet" href="css/notice_write.css">
+  <link rel="stylesheet" href="../css/notice_write.css">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 </div>
 
 <script>
-document.getElementById("saveBtn").onclick = () => {
+document.getElementById("saveBtn").onclick = async () => {
   const title = document.getElementById("title").value;
   const content = document.getElementById("content").value;
   const imageInput = document.getElementById("imageInput").files[0];
@@ -42,29 +42,41 @@ document.getElementById("saveBtn").onclick = () => {
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const imgURL = imageInput ? e.target.result : null;
+  // 1) 이미지 → base64 변환
+  const convertImage = () =>
+    new Promise((resolve) => {
+      if (!imageInput) return resolve(null);
 
-    const saved = JSON.parse(localStorage.getItem("noticeData") || "[]");
-
-    saved.push({
-      title,
-      content,
-      image: imgURL,
-      date: new Date().toISOString().slice(0,10)
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(imageInput);
     });
 
-    localStorage.setItem("noticeData", JSON.stringify(saved));
+  const image = await convertImage();
 
-    alert("저장되었습니다!");
+  // 2) 서버로 전송
+  const response = await fetch("http://localhost:3000/notice", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ title, content, image })
+  });
+
+  const result = await response.json();
+
+  if (result.success) {
+    alert("공지 저장 완료!");
     location.href = "notice.html";
-  };
-
-  if (imageInput) reader.readAsDataURL(imageInput);
-  else reader.onload();
+  } else {
+    alert("저장 실패: " + result.error);
+  }
 };
 </script>
+
+
+
+
 
 </body>
 </html>
