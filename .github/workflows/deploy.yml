@@ -2,31 +2,30 @@ name: Deploy to Railway
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+    - name: Checkout repo
+      uses: actions/checkout@v3
 
-      - name: Install Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+    - name: Install Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: "20"
 
-      - name: Install Railway
-        run: npm install -g @railway/cli
+    - name: Install Railway CLI
+      run: npm install -g @railway/cli
 
-      - name: Install Backend Dependencies
-        working-directory: ./backend
-        run: npm install
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        npm install
 
-      - name: Deploy to Railway
-        working-directory: ./backend
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --ci
+    - name: Deploy to Railway
+      run: railway up --service webprogram --ci
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
