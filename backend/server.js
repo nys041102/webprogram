@@ -115,3 +115,6 @@ app.get("/notice/:id", async (req, res) => {
     res.status(500).json({ error: "DB 조회 실패" });
   }
 });
+
+
+console.log("Deploy test");
