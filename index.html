@@ -70,7 +70,7 @@
 
     // ⭐ 댓글 목록 불러오기
     function loadComments() {
-      fetch("http://localhost:3000/comment")
+      fetch("/comment")
         .then(res => res.json())
         .then(list => {
           commentList.innerHTML = "";
@@ -95,7 +95,7 @@
       const name = document.getElementById("username").value;
       const message = document.getElementById("comment").value;
 
-      fetch("http://localhost:3000/comment", {
+      fetch("/comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

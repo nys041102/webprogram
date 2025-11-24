@@ -50,7 +50,7 @@
 
 <!-- 🔥 DB에서 공지 불러오기 -->
 <script>
-fetch("http://localhost:3000/notice")
+fetch("/notice")
   .then(res => res.json())
   .then(notices => {
 

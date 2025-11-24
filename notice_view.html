@@ -32,7 +32,7 @@ if (!id) {
 }
 
 // DB에서 공지 데이터 가져오기
-fetch(`http://localhost:3000/notice/${id}`)
+fetch(`/notice/${id}`)
   .then(res => res.json())
   .then(data => {
     if (!data || data.error) {
@@ -50,6 +50,7 @@ fetch(`http://localhost:3000/notice/${id}`)
       img.style.display = "block";
     }
   });
+
 </script>
 
 </body>

@@ -59,7 +59,7 @@
         return;
       }
 
-      fetch("http://localhost:3000/inquiry", {
+      fetch("/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, message })
@@ -78,7 +78,7 @@
 
     // ⭐ 문의 목록 불러오기 (GET)
     function loadInquiry() {
-      fetch("http://localhost:3000/inquiry")
+      fetch("/inquiry")
         .then(res => res.json())
         .then(list => {
           listBox.innerHTML = "";
