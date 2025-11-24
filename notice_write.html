@@ -55,7 +55,7 @@ document.getElementById("saveBtn").onclick = async () => {
   const image = await convertImage();
 
   // 2) 서버로 전송
-  const response = await fetch("/notice", {
+  const response = await fetch("http://localhost:3000/notice", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
