@@ -114,6 +114,11 @@
       .catch(err => console.error("댓글 저장 오류:", err));
     });
 
+    fetch("http://localhost:3000/log", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ page: "index", action: "visit" })
+  });
     // 페이지 열리면 자동으로 댓글 목록 불러오기
     loadComments();
   </script>
