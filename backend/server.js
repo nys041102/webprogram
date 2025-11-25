@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const mongoClient = require("./mongo");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -90,6 +92,27 @@ app.get("/comment", async (req, res) => {
     res.status(500).json({ error: "댓글 불러오기 실패" });
   }
 });
+/* ============ MongoDB Log 저장 기능 ============ */
+app.post("/log", async (req, res) => {
+  const { page, action } = req.body;
+
+  try {
+    await mongoClient.connect();
+    const db = mongoClient.db("webproject"); // DB 이름 아무거나
+    const logs = db.collection("logs");
+
+    await logs.insertOne({
+      page,
+      action,
+      createdAt: new Date()
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false, error: err.message });
+  }
+});
+
 
 /* ============ 서버 실행 ============ */
 app.listen(PORT, () => {
@@ -116,5 +139,3 @@ app.get("/notice/:id", async (req, res) => {
   }
 });
 
-
-console.log("Deploy test");
