@@ -1,0 +1,19 @@
+name: Node.js CD
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: CD Complete Message
+      run: echo "CD: 배포 자동화 완료 (로컬 환경에서 node server.js 실행)"
