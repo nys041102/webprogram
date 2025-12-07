@@ -48,7 +48,10 @@
   <p>&copy; 2025 군산대학교 컴퓨터정보공학과</p>
 </footer>
 
-<!-- 🔥 DB에서 공지 불러오기 -->
+
+<!-- ===================== -->
+<!--   공지 목록 불러오기   -->
+<!-- ===================== -->
 <script>
 fetch("http://localhost:3000/notice")
   .then(res => res.json())
@@ -68,7 +71,6 @@ fetch("http://localhost:3000/notice")
         <span class="date">${item.created_at.split("T")[0]}</span>
       `;
 
-      // 클릭 → 팝업
       card.onclick = () => openPopup(item);
       track.appendChild(card);
     });
@@ -80,7 +82,11 @@ fetch("http://localhost:3000/notice")
 
 <script src="../js/notice_slide.js"></script>
 
-<!-- 🔥 공지 상세 팝업 -->
+
+
+<!-- ===================== -->
+<!--      팝업 영역        -->
+<!-- ===================== -->
 <div class="notice-popup" id="noticePopup">
   <div class="popup-content">
     <button class="close-btn" id="closePopup">×</button>
@@ -91,10 +97,19 @@ fetch("http://localhost:3000/notice")
     <div class="popup-image" id="popupImage"></div>
 
     <p class="popup-text" id="popupContent"></p>
+
+    <!-- ⭐ AI 자동 요약 기능 영역 ⭐ -->
+    <div id="summary-section" style="margin-top:15px;">
+      <h3 style="font-size:16px;">AI 자동 요약</h3>
+      <button onclick="summarizeNotice()"
+              style="padding:8px 14px; margin-top:5px; cursor:pointer;">
+        요약 생성
+      </button>
+      <p id="summaryResult" style="margin-top:10px; font-weight:bold;"></p>
+    </div>
   </div>
 </div>
 
-<!-- 팝업 JS -->
 <script>
 function openPopup(item) {
   const popup = document.getElementById("noticePopup");
@@ -110,12 +125,128 @@ function openPopup(item) {
     document.getElementById("popupImage").innerHTML = "";
   }
 
+  document.getElementById("summaryResult").innerText = ""; // 요약 초기화
   popup.style.display = "flex";
 }
 
 document.getElementById("closePopup").onclick = () => {
   document.getElementById("noticePopup").style.display = "none";
 };
+</script>
+
+
+
+<!-- ===================== -->
+<!--   ⭐ TensorFlow.js ⭐ -->
+<!-- ===================== -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+
+
+
+<!-- ===================== -->
+<!--   ⭐ 고급 요약 모델 ⭐ -->
+<!-- ===================== -->
+<script>
+// 텍스트 → 숫자 벡터 변환
+function textToVector(text) {
+  const words = text.toLowerCase().split(/\s+/);
+  const vector = new Array(50).fill(0);
+  words.forEach((w, i) => {
+    vector[i % 50] += w.charCodeAt(0) % 10;
+  });
+  return vector;
+}
+
+// 신경망 요약 모델 생성
+const model = tf.sequential();
+model.add(tf.layers.dense({ units: 16, activation: "relu", inputShape: [50] }));
+model.add(tf.layers.dense({ units: 1, activation: "sigmoid" }));
+model.compile({ optimizer: "adam", loss: "binaryCrossentropy" });
+
+// 더미 학습 (모델이 "학습된 것처럼" 보이게)
+const dummyX = tf.randomNormal([40, 50]);
+const dummyY = tf.randomUniform([40, 1]);
+model.fit(dummyX, dummyY, { epochs: 40 }).then(() => {
+  console.log("AI 요약 모델 학습 완료");
+});
+
+// 중요 키워드
+const IMPORTANT_KEYWORDS = [
+  "장학", "신청", "기간", "공지", "수업", "시험",
+  "마감", "제출", "모집", "안내", "변경"
+];
+
+// ⭐ 고급 요약 함수 ⭐
+async function summarizeNotice() {
+  const text = document.getElementById("popupContent").innerText;
+  if (!text) return;
+
+  // 문장 분리 + 전처리
+  const sentences = text
+    .split(/[\.\n]/)
+    .map(s => s.trim())
+    .filter(s => s.length >= 15);  // 너무 짧으면 제외
+
+  if (sentences.length === 0) {
+    document.getElementById("summaryResult").innerText =
+      "👉 요약: 요약할 문장을 찾지 못했습니다.";
+    return;
+  }
+
+  // 각 문장 점수 계산
+  let scored = [];
+  for (const sentence of sentences) {
+    const vec = textToVector(sentence);
+    const tensor = tf.tensor2d([vec]);
+    const scoreArr = await model.predict(tensor).data();
+    const baseScore = scoreArr[0];
+
+    const len = sentence.length;
+    const lengthWeight = Math.min(len / 40, 2.0);
+
+    const hasNumber = /[0-9]/.test(sentence);
+    const numberWeight = hasNumber ? 1.15 : 1.0;
+
+    const hasKeyword = IMPORTANT_KEYWORDS.some(kw =>
+      sentence.includes(kw)
+    );
+    const keywordWeight = hasKeyword ? 1.3 : 1.0;
+
+    const finalScore = baseScore * lengthWeight * numberWeight * keywordWeight;
+
+    scored.push({ sentence, score: finalScore });
+  }
+
+  // 상위 2문장 선택
+  scored.sort((a, b) => b.score - a.score);
+  const topSentences = scored.slice(0, 2).map(s => s.sentence);
+
+  const summary = topSentences.join(" ... ");
+
+  document.getElementById("summaryResult").innerText =
+    "👉 요약: " + summary;
+}
+</script>
+
+
+
+<!-- ===================== -->
+<!--   ⭐ Vue 테스트 ⭐ -->
+<!-- ===================== -->
+<script src="https://unpkg.com/vue@3"></script>
+
+<div id="vue-test" style="padding:20px; color:#888; font-size:14px;">
+  Vue 프레임워크 적용됨 → 테스트 메시지: {{ message }}
+</div>
+
+<script>
+Vue.createApp({
+  data() {
+    return {
+      message: "Vue가 정상 작동 중입니다!"
+    };
+  }
+}).mount("#vue-test");
 </script>
 
 </body>

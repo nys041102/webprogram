@@ -114,7 +114,7 @@
       .catch(err => console.error("댓글 저장 오류:", err));
     });
 
-    fetch("http://localhost:3000/log", {
+    fetch("http://localhost:3000/log", { //댓글작성
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({ page: "index", action: "visit" })
