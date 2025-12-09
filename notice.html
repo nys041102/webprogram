@@ -32,13 +32,12 @@
   <a href="notice_write.html" class="write-btn">+ 공지 작성</a>
 </section>
 
-<!-- 캐러셀 전체 박스 -->
+<!-- 캐러셀 -->
 <div class="carousel-container">
-
   <button class="carousel-btn left">&#10094;</button>
 
   <div class="carousel-track">
-    <!-- JS가 채움 -->
+    <!-- JS에서 채움 -->
   </div>
 
   <button class="carousel-btn right">&#10095;</button>
@@ -49,16 +48,15 @@
 </footer>
 
 
-<!-- ===================== -->
-<!--   공지 목록 불러오기   -->
-<!-- ===================== -->
+<!-- ======================= -->
+<!--   공지 목록 불러오기     -->
+<!-- ======================= -->
 <script>
 fetch("http://localhost:3000/notice")
   .then(res => res.json())
   .then(notices => {
-
     const track = document.querySelector(".carousel-track");
-    track.innerHTML = ""; 
+    track.innerHTML = "";
 
     notices.forEach(item => {
       const card = document.createElement("div");
@@ -83,10 +81,9 @@ fetch("http://localhost:3000/notice")
 <script src="../js/notice_slide.js"></script>
 
 
-
-<!-- ===================== -->
-<!--      팝업 영역        -->
-<!-- ===================== -->
+<!-- ======================= -->
+<!--         팝업            -->
+<!-- ======================= -->
 <div class="notice-popup" id="noticePopup">
   <div class="popup-content">
     <button class="close-btn" id="closePopup">×</button>
@@ -98,10 +95,10 @@ fetch("http://localhost:3000/notice")
 
     <p class="popup-text" id="popupContent"></p>
 
-    <!-- ⭐ AI 자동 요약 기능 영역 ⭐ -->
+    <!-- ⭐ AI 요약 기능 ⭐ -->
     <div id="summary-section" style="margin-top:15px;">
       <h3 style="font-size:16px;">AI 자동 요약</h3>
-      <button onclick="summarizeNotice()"
+      <button onclick="summarizeNotice()" 
               style="padding:8px 14px; margin-top:5px; cursor:pointer;">
         요약 생성
       </button>
@@ -125,7 +122,7 @@ function openPopup(item) {
     document.getElementById("popupImage").innerHTML = "";
   }
 
-  document.getElementById("summaryResult").innerText = ""; // 요약 초기화
+  document.getElementById("summaryResult").innerText = "";
   popup.style.display = "flex";
 }
 
@@ -135,19 +132,13 @@ document.getElementById("closePopup").onclick = () => {
 </script>
 
 
-
-<!-- ===================== -->
-<!--   ⭐ TensorFlow.js ⭐ -->
-<!-- ===================== -->
+<!-- ======================= -->
+<!--    TensorFlow.js        -->
+<!-- ======================= -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
 
-
-
-<!-- ===================== -->
-<!--   ⭐ 고급 요약 모델 ⭐ -->
-<!-- ===================== -->
 <script>
-// 텍스트 → 숫자 벡터 변환
+// 텍스트 벡터 변환
 function textToVector(text) {
   const words = text.toLowerCase().split(/\s+/);
   const vector = new Array(50).fill(0);
@@ -157,82 +148,61 @@ function textToVector(text) {
   return vector;
 }
 
-// 신경망 요약 모델 생성
+const IMPORTANT_KEYWORDS = [
+  "장학", "신청", "기간", "공지", "수업", "시험",
+  "마감", "제출", "모집", "안내", "변경"
+];
+
+// 요약 모델 생성
 const model = tf.sequential();
 model.add(tf.layers.dense({ units: 16, activation: "relu", inputShape: [50] }));
 model.add(tf.layers.dense({ units: 1, activation: "sigmoid" }));
 model.compile({ optimizer: "adam", loss: "binaryCrossentropy" });
 
-// 더미 학습 (모델이 "학습된 것처럼" 보이게)
+// 더미 학습
 const dummyX = tf.randomNormal([40, 50]);
 const dummyY = tf.randomUniform([40, 1]);
 model.fit(dummyX, dummyY, { epochs: 40 }).then(() => {
   console.log("AI 요약 모델 학습 완료");
 });
 
-// 중요 키워드
-const IMPORTANT_KEYWORDS = [
-  "장학", "신청", "기간", "공지", "수업", "시험",
-  "마감", "제출", "모집", "안내", "변경"
-];
-
-// ⭐ 고급 요약 함수 ⭐
+// 요약 함수
 async function summarizeNotice() {
   const text = document.getElementById("popupContent").innerText;
-  if (!text) return;
 
-  // 문장 분리 + 전처리
   const sentences = text
     .split(/[\.\n]/)
     .map(s => s.trim())
-    .filter(s => s.length >= 15);  // 너무 짧으면 제외
+    .filter(s => s.length >= 15);
 
-  if (sentences.length === 0) {
-    document.getElementById("summaryResult").innerText =
-      "👉 요약: 요약할 문장을 찾지 못했습니다.";
-    return;
-  }
-
-  // 각 문장 점수 계산
   let scored = [];
+
   for (const sentence of sentences) {
     const vec = textToVector(sentence);
     const tensor = tf.tensor2d([vec]);
-    const scoreArr = await model.predict(tensor).data();
-    const baseScore = scoreArr[0];
+    const baseScore = (await model.predict(tensor).data())[0];
 
-    const len = sentence.length;
-    const lengthWeight = Math.min(len / 40, 2.0);
-
-    const hasNumber = /[0-9]/.test(sentence);
-    const numberWeight = hasNumber ? 1.15 : 1.0;
-
-    const hasKeyword = IMPORTANT_KEYWORDS.some(kw =>
-      sentence.includes(kw)
-    );
-    const keywordWeight = hasKeyword ? 1.3 : 1.0;
+    const lengthWeight = Math.min(sentence.length / 40, 2.0);
+    const numberWeight = /[0-9]/.test(sentence) ? 1.15 : 1.0;
+    const keywordWeight = IMPORTANT_KEYWORDS.some(kw => sentence.includes(kw)) ? 1.3 : 1.0;
 
     const finalScore = baseScore * lengthWeight * numberWeight * keywordWeight;
 
     scored.push({ sentence, score: finalScore });
   }
 
-  // 상위 2문장 선택
   scored.sort((a, b) => b.score - a.score);
-  const topSentences = scored.slice(0, 2).map(s => s.sentence);
+  const summary = scored.slice(0, 2).map(s => s.sentence).join(" ... ");
 
-  const summary = topSentences.join(" ... ");
-
-  document.getElementById("summaryResult").innerText =
-    "👉 요약: " + summary;
+  document.getElementById("summaryResult").innerText = "👉 요약: " + summary;
 }
 </script>
 
 
 
-<!-- ===================== -->
-<!--   ⭐ Vue 테스트 ⭐ -->
-<!-- ===================== -->
+<!-- ======================= -->
+<!--        Vue 영역          -->
+<!-- ======================= -->
 <script src="https://unpkg.com/vue@3"></script>
 
 <div id="vue-test" style="padding:20px; color:#888; font-size:14px;">
@@ -242,11 +212,97 @@ async function summarizeNotice() {
 <script>
 Vue.createApp({
   data() {
-    return {
-      message: "Vue가 정상 작동 중입니다!"
-    };
+    return { message: "Vue가 정상 작동 중입니다!" };
   }
 }).mount("#vue-test");
+</script>
+
+
+
+<!-- ======================= -->
+<!--      React 검색 영역     -->
+<!-- ======================= -->
+
+<!-- React CDN -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<!-- 검색 UI가 렌더링될 자리 -->
+<div id="react-search" style="padding:20px; margin-top:30px;"></div>
+
+<script>
+function NoticeSearch() {
+  const [query, setQuery] = React.useState("");
+  const [results, setResults] = React.useState([]);
+
+  const handleSearch = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    const res = await fetch("http://localhost:3000/notice");
+    const notices = await res.json();
+
+    const filtered = notices.filter(n =>
+      n.title.includes(value) || n.content.includes(value)
+    );
+
+    setResults(filtered);
+  };
+
+  return React.createElement(
+    "div",
+    { style: {
+        background: "#fff",
+        padding: "20px",
+        borderRadius: "12px",
+        boxShadow: "0 5px 15px rgba(0,0,0,0.1)"
+      }},
+
+    React.createElement("input", {
+      type: "text",
+      placeholder: "공지 검색 (제목/내용)",
+      value: query,
+      onChange: handleSearch,
+      style: {
+        padding: "12px 15px",
+        width: "100%",
+        borderRadius: "10px",
+        border: "1px solid #ccc",
+        marginBottom: "20px",
+        fontSize: "16px"
+      }
+    }),
+
+    React.createElement(
+      "div",
+      null,
+      results.length === 0 && query !== ""
+        ? React.createElement("p", { style: { color: "#888" }}, "검색 결과가 없습니다.")
+        : results.map(n =>
+            React.createElement(
+              "div",
+              {
+                key: n.id,
+                onClick: () => openPopup(n),
+                style: {
+                  padding: "12px 15px",
+                  background: "#f8f8f8",
+                  borderRadius: "8px",
+                  marginBottom: "12px",
+                  cursor: "pointer",
+                  transition: "0.2s"
+                }
+              },
+              React.createElement("strong", null, n.title),
+              React.createElement("p", null, n.content.slice(0, 40) + "...")
+            )
+          )
+    )
+  );
+}
+
+const searchRoot = ReactDOM.createRoot(document.getElementById("react-search"));
+searchRoot.render(React.createElement(NoticeSearch));
 </script>
 
 </body>
